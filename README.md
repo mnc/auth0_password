@@ -1,6 +1,6 @@
 # Auth0Password
 
-This is an Auth0 password generator gem.
+This is an Auth0 password random generator gem.
 You can generate a password for Auth0 database connection, which is suitable with each password strength.
 This gem supports following password strength, excellent, good, fair and low.
 
