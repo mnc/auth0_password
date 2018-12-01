@@ -1,4 +1,5 @@
 require "auth0_password/version"
+require 'logger'
 
 class Auth0Password
 
@@ -7,15 +8,17 @@ class Auth0Password
   NUMBERS       = (0..9).to_a
   SPECIAL_CHARS = %w|! @ # $ % ^ & *|
 
-  def initialize(length=8)
-    @length = length
+  def initialize(min_length=8)
+    @min_length = min_length
   end
 
   # TODO: policyに動的に対応する
-  def generate
+  def generate(length)
+    password_length = @min_length > length ? @min_length : length
+    logger.warn("length parameter #{length} is less than min_length #{@min_length}") if @min_length > length
     required_elements = required_lowercases + required_uppercases + required_numbers + required_special_chars
     available_chars.tap do |a|
-      random_elements = @length.times.map { a.sample }
+      random_elements = password_length.times.map { a.sample }
       break (required_elements + random_elements).join
     end
   end
@@ -40,5 +43,9 @@ class Auth0Password
 
   def required_special_chars(size=1)
     SPECIAL_CHARS.sample(size)
+  end
+
+  def logger
+    @logger ||= Logger.new(STDOUT)
   end
 end
