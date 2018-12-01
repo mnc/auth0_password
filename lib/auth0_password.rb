@@ -5,7 +5,7 @@ class Auth0Password
 
   LOWERCASES    = ('A'..'Z').to_a
   UPPERCASES    = ('a'..'z').to_a
-  NUMBERS       = (0..9).to_a
+  NUMBERS       = ('0'..'9').to_a
   SPECIAL_CHARS = %w|! @ # $ % ^ & *|
   STRENGTH      = %i|excellent good fair low|
 
