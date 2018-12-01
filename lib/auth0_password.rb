@@ -14,7 +14,6 @@ class Auth0Password
     @min_length = min_length
   end
 
-  # TODO: policyに動的に対応する
   def generate(length)
     password_length = @min_length > length ? @min_length : length
     logger.warn("length parameter #{length} is less than min_length #{@min_length}") if @min_length > length
@@ -35,26 +34,26 @@ class Auth0Password
   private
 
   def excellent(length)
-    required_elements = random_lowercase + random_uppercase + random_number + random_special_char
+    required_chars = [random_lowercase, random_uppercase, random_number, random_special_char]
     (LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS).tap do |a|
-      random_elements = length.times.map { a.sample }
-      break (required_elements + random_elements).shuffle.join
+      random_chars = length.times.map { a.sample }
+      break (required_chars + random_chars).shuffle.join
     end
   end
 
   def good(length)
-    required_elements = random_lowercase + random_uppercase + random_number + random_special_char
+    required_chars = [random_lowercase, random_uppercase, random_number, random_special_char]
     (LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS).tap do |a|
-      random_elements = length.times.map { a.sample }
-      break (required_elements + random_elements).shuffle.join
+      random_chars = length.times.map { a.sample }
+      break (required_chars + random_chars).shuffle.join
     end
   end
 
   def fair(length)
-    required_elements = random_lowercase + random_uppercase + random_number
+    required_chars = [random_lowercase, random_uppercase, random_number]
     (LOWERCASES + UPPERCASES + NUMBERS).tap do |a|
-      random_elements = length.times.map { a.sample }
-      break (required_elements + random_elements).shuffle.join
+      random_chars = length.times.map { a.sample }
+      break (required_chars + random_chars).shuffle.join
     end
   end
 
