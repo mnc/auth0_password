@@ -1,8 +1,8 @@
 # Auth0Password
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/auth0_password`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
+This is an Auth0 password generator gem.
+You can generate a password for Auth0 database connection, which is suitable with each password strength.
+This gem supports following password strength, excellent, good, fair and low.
 
 ## Installation
 
@@ -22,7 +22,26 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+### Basic
+```ruby
+# excellent
+Auth0Password.new(strength: :excellent).generate
+
+# good
+Auth0Password.new(strength: :good).generate
+
+# fair and min length of password is 10
+Auth0Password.new(strength: :fair, min_length: 10).generate
+
+# low
+Auth0Password.new(strength: :low).generate
+```
+
+### Password length
+```ruby
+# set password length to generate as 15
+Auth0Password.new(strength: :excellent).generate(15)
+```
 
 ## Development
 
