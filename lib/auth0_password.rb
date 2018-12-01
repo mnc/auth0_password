@@ -36,11 +36,16 @@ class Auth0Password
   private
 
   def excellent(length)
-    required_chars = [random_lowercase, random_uppercase, random_number, random_special_char]
-    (LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS).tap do |a|
-      random_chars = length.times.map { a.sample }
-      break (required_chars + random_chars).shuffle.join
+    good(length).tap do |password|
+      while m = /(.)\1+/.match(password) do
+        replace_char!(password, m)
+      end
     end
+  end
+
+  def replace_char!(password, match_data)
+    excepted_chars = ALL_CHARS - [match_data[1]]
+    password[match_data.begin(0) + 1] = excepted_chars.sample
   end
 
   def good(length)
