@@ -19,16 +19,10 @@ class Auth0Password
   def generate(length=DEFAULT_LENGTH)
     password_length = @min_length > length ? @min_length : length
     logger.warn("length parameter #{length} is less than min_length #{@min_length}") if @min_length > length
-    case @strength
-    when :excellent
-      excellent(password_length)
-    when :good
-      good(password_length)
-    when :fair
-      fair(password_length)
-    when :low
-      low(password_length)
+    if STRENGTH.include?(@strength)
+      send(@strength, password_length)
     else
+      logger.warn("strength #{@strength} is invalid. use excellent strength instead")
       excellent(password_length)
     end
   end
