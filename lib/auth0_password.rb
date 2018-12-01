@@ -7,14 +7,16 @@ class Auth0Password
   UPPERCASES    = ('a'..'z').to_a
   NUMBERS       = ('0'..'9').to_a
   SPECIAL_CHARS = %w|! @ # $ % ^ & *|
-  STRENGTH      = %i|excellent good fair low|
+  ALL_CHARS     = LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS
+  STRENGTH = %i|excellent good fair low|
+  DEFAULT_LENGTH = 8
 
-  def initialize(strength: , min_length: 8)
+  def initialize(strength: , min_length: DEFAULT_LENGTH)
     @strength   = strength
     @min_length = min_length
   end
 
-  def generate(length)
+  def generate(length=DEFAULT_LENGTH)
     password_length = @min_length > length ? @min_length : length
     logger.warn("length parameter #{length} is less than min_length #{@min_length}") if @min_length > length
     case @strength
@@ -43,7 +45,7 @@ class Auth0Password
 
   def good(length)
     required_chars = [random_lowercase, random_uppercase, random_number, random_special_char]
-    (LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS).tap do |a|
+    ALL_CHARS.tap do |a|
       random_chars = length.times.map { a.sample }
       break (required_chars + random_chars).shuffle.join
     end
@@ -58,7 +60,7 @@ class Auth0Password
   end
 
   def low(length)
-    (LOWERCASES + UPPERCASES + NUMBERS + SPECIAL_CHARS).tap do |a|
+    ALL_CHARS.tap do |a|
       break length.times.map { a.sample }.join
     end
   end
