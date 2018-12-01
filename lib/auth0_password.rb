@@ -13,7 +13,7 @@ class Auth0Password
 
   # TODO: policyに動的に対応する
   def generate
-    required_elements = [required_lowercases, required_uppercases, required_numbers, required_special_chars].flatten
+    required_elements = required_lowercases + required_uppercases + required_numbers + required_special_chars
     available_chars.tap do |a|
       random_elements = @length.times.map { a.sample }
       break (required_elements + random_elements).join
