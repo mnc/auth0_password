@@ -26,22 +26,22 @@ Or install it yourself as:
 ### Basic
 ```ruby
 # excellent
-Auth0Password.new(strength: :excellent).generate
+Auth0Password.new.excellent
 
 # good
-Auth0Password.new(strength: :good).generate
+Auth0Password.new.good
 
 # fair and min length of password is 10
-Auth0Password.new(strength: :fair, min_length: 10).generate
+Auth0Password.new(min_length: 10).fair
 
 # low
-Auth0Password.new(strength: :low).generate
+Auth0Password.new.low
 ```
 
 ### Password length
 ```ruby
 # set password length to generate as 15
-Auth0Password.new(strength: :excellent).generate(15)
+Auth0Password.new.excellent(15)
 ```
 
 ## Development
