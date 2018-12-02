@@ -30,16 +30,17 @@ class Auth0Password
   private
 
   def excellent(length)
-    good(length).tap do |password|
-      while m = /(.)\1+/.match(password) do
-        replace_char!(password, m)
-      end
-    end
+    good_password = good(length)
+    replace_continuous_chars!(good_password)
   end
 
-  def replace_char!(password, match_data)
-    excepted_chars = ALL_CHARS - [match_data[1]]
-    password[match_data.begin(0) + 1] = excepted_chars.sample
+  def replace_continuous_chars!(password)
+    password.tap do |pass|
+      while m = /(.)\1+/.match(pass) do
+        excepted_chars = ALL_CHARS - [m[1]]
+        pass[m.begin(0) + 1] = excepted_chars.sample
+      end
+    end
   end
 
   def good(length)
