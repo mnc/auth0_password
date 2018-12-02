@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["manchose9@gmail.com"]
 
   spec.summary       = %q{Auth0Password is a Ruby gem to generate random password for Auth0 database connection}
-  spec.description   = %q{Auth0Password is a Ruby gem to generate random password for Auth0 database connection, which supports following password strength, excellent, good, fair and low.}
+  spec.description   = %q{Auth0Password is a Ruby gem to generate random password for Auth0 database connection. The password can be generated appropriately to each of Auth0 password strength (excellent, good, fair and low).}
   spec.homepage      = "https://github.com/mnc/auth0_password"
   spec.license       = "MIT"
 
