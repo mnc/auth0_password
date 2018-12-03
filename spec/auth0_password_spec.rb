@@ -55,7 +55,7 @@ RSpec.describe Auth0Password do
 
   describe "#low" do
     context "when strength is low" do
-      subject(:password_length) { Auth0Password.new(min_length: 10).fair(length).length }
+      subject(:password_length) { Auth0Password.new(min_length: 10).low(length).length }
 
       it_behaves_like "generating a password more than min_length"
     end
