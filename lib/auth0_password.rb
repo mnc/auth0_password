@@ -15,37 +15,31 @@ class Auth0Password
   end
 
   def excellent(length=DEFAULT_LENGTH)
-    rounded_up_length = roundup_length(length)
-    good_password = good(rounded_up_length)
+    good_password = good(roundup_length(length))
     replace_continuous_chars!(good_password)
   end
 
   def good(length=DEFAULT_LENGTH)
-    rounded_up_length = roundup_length(length)
     required_chars = [random_lowercase, random_uppercase, random_number, random_special_char]
-    ALL_CHARS.tap do |a|
-      random_chars = rounded_up_length.times.map { a.sample }
-      break (required_chars + random_chars).shuffle.join
-    end
+    add_random_chars(ALL_CHARS, required_chars, roundup_length(length))
   end
 
   def fair(length=DEFAULT_LENGTH)
-    rounded_up_length = roundup_length(length)
     required_chars = [random_lowercase, random_uppercase, random_number]
-    (LOWERCASES + UPPERCASES + NUMBERS).tap do |a|
-      random_chars = rounded_up_length.times.map { a.sample }
-      break (required_chars + random_chars).shuffle.join
-    end
+    add_random_chars(LOWERCASES + UPPERCASES + NUMBERS, required_chars, roundup_length(length))
   end
 
   def low(length=DEFAULT_LENGTH)
-    rounded_up_length = roundup_length(length)
-    ALL_CHARS.tap do |a|
-      break rounded_up_length.times.map { a.sample }.join
-    end
+    roundup_length(length).times.map { ALL_CHARS.sample }.join
   end
 
   private
+
+  def add_random_chars(chars, required_chars, length)
+    additional_char_length = length - required_chars.size
+    random_chars = additional_char_length.times.map { chars.sample }
+    (required_chars + random_chars).shuffle.join
+  end
 
   def roundup_length(length)
     logger.warn("length parameter #{length} is less than min_length #{@min_length}") if @min_length > length
