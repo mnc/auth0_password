@@ -1,6 +1,8 @@
 # Auth0Password
 [![Build Status](https://travis-ci.org/mnc/auth0_password.svg?branch=master)](https://travis-ci.org/mnc/auth0_password)
 [![MIT License](http://img.shields.io/badge/license-MIT-blue.svg?style=flat)](LICENSE)
+[![Maintainability](https://api.codeclimate.com/v1/badges/0fc6ab1e63c8f164c598/maintainability)](https://codeclimate.com/github/mnc/auth0_password/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/0fc6ab1e63c8f164c598/test_coverage)](https://codeclimate.com/github/mnc/auth0_password/test_coverage)
 
 Auth0Password is a Ruby gem to generate random password for Auth0 database connection.
 The password can be generated appropriately to each of Auth0 password strength (excellent, good, fair and low). 
