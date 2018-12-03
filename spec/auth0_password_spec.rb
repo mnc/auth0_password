@@ -1,19 +1,23 @@
 RSpec.describe Auth0Password do
+  shared_examples "generating a password more than min_length" do
+    context "with length parameter 12" do
+      let(:length) { 12 }
+
+      it { is_expected.to eq(12) }
+    end
+
+    context "with length parameter 8" do
+      let(:length) { 8 }
+
+      it { is_expected.to eq(10) }
+    end
+  end
+
   describe "#excellent" do
     context "when min_length is 10" do
       subject(:password_length) { Auth0Password.new(min_length: 10).excellent(length).length }
 
-      context "with length parameter 12" do
-        let(:length) { 12 }
-
-        it { is_expected.to eq(12) }
-      end
-
-      context "with length parameter 8" do
-        let(:length) { 8 }
-
-        it { is_expected.to eq(10) }
-      end
+      it_behaves_like "generating a password more than min_length"
     end
 
     context "when called 10000 times" do
@@ -29,17 +33,7 @@ RSpec.describe Auth0Password do
     context "when min_length is 10" do
       subject(:password_length) { Auth0Password.new(min_length: 10).good(length).length }
 
-      context "with length parameter 12" do
-        let(:length) { 12 }
-
-        it { is_expected.to eq(12) }
-      end
-
-      context "with length parameter 8" do
-        let(:length) { 8 }
-
-        it { is_expected.to eq(10) }
-      end
+      it_behaves_like "generating a password more than min_length"
     end
 
     context "when called 10000 times" do
@@ -55,17 +49,7 @@ RSpec.describe Auth0Password do
     context "when strength is fair" do
       subject(:password_length) { Auth0Password.new(min_length: 10).fair(length).length }
 
-      context "with length parameter 12" do
-        let(:length) { 12 }
-
-        it { is_expected.to eq(12) }
-      end
-
-      context "with length parameter 8" do
-        let(:length) { 8 }
-
-        it { is_expected.to eq(10) }
-      end
+      it_behaves_like "generating a password more than min_length"
     end
   end
 
@@ -73,17 +57,7 @@ RSpec.describe Auth0Password do
     context "when strength is low" do
       subject(:password_length) { Auth0Password.new(min_length: 10).fair(length).length }
 
-      context "with length parameter 12" do
-        let(:length) { 12 }
-
-        it { is_expected.to eq(12) }
-      end
-
-      context "with length parameter 8" do
-        let(:length) { 8 }
-
-        it { is_expected.to eq(10) }
-      end
+      it_behaves_like "generating a password more than min_length"
     end
   end
 
