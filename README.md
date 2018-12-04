@@ -30,15 +30,19 @@ Or install it yourself as:
 ```ruby
 # excellent (the password doesn't have more than 2 continuous characters)
 Auth0Password.new.excellent
+#=> "TH#8tl*k"
 
 # good (the password has a lowercase letter, an uppercase letter, and a number)
 Auth0Password.new.good
+#=> "Oa3WE@k"
 
 # fair and min length of password is 10
 Auth0Password.new(min_length: 10).fair
+#=> "fHHsUZt06K"
 
 # low
 Auth0Password.new.low
+#=> "brcwC1Ij"
 ```
 
 ### Password length
