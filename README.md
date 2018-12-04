@@ -28,10 +28,10 @@ Or install it yourself as:
 
 ### Basic
 ```ruby
-# excellent
+# excellent (the password doesn't have more than 2 continuous characters)
 Auth0Password.new.excellent
 
-# good
+# good (the password has a lowercase letter, an uppercase letter, and a number)
 Auth0Password.new.good
 
 # fair and min length of password is 10
